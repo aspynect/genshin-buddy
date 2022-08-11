@@ -1,7 +1,9 @@
+const { randomBytes } = require('crypto');
 const fs = require('fs/promises')
 const flags = require('./flags.json');
+const messages = require('./messages.json')
 
-async function timer(client, roleName) {
+async function weeklyTimer(client, roleName) {
     console.log(flags)
     console.log(`Logged in as ${client.user.tag}!`);
     for (const guildId of client.guilds.cache.keys()) {
@@ -23,7 +25,8 @@ async function timer(client, roleName) {
                 if (channel.name.toLowerCase().includes('bot')) {
                     console.log("Channel Found")
                     if (pinged_role) {
-                        await channel.send(`<@&${pinged_role.id}> \n Comrades, they're back!\n Time to plunder weekly bosses!\n`);
+                        await channel.send(`<@&${pinged_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
+                        if(flags.abyss) {await channel.send(`${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}`)}
                     }
                     break;
                 }
@@ -32,4 +35,4 @@ async function timer(client, roleName) {
     }
 }
 
-module.exports = timer
+module.exports = weeklyTimer

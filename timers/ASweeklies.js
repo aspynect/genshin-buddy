@@ -2,12 +2,12 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const fs = require('fs/promises')
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const secrets = require('../secrets.json');
-const timer = require('./timer.js')
+const weeklyTimer = require('./timers.js')
 const flags = require('./flags.json');
 
 
 client.on('ready', async () => {
-    await timer(client, "Weekly Reminders AS")
+    await weeklyTimer(client, "Weekly Reminders AS")
     process.exit();
 });
 

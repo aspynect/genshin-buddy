@@ -1,5 +1,6 @@
 {
     "weeklies": [
+        "Your weekly bosses have reset",
         "Comrades, the bosses have returned!",
         "Comrades, it's time to spar!",
         "Comrades, it's time to plunder!"
@@ -9,9 +10,11 @@
         "Never thought I'd be back in the abyss!"
     ],
     "parametric": [
-
+        "Your Parametric Tranformer is ready!",
+        "Stuff your materials into this box to get free stuff"
     ],
     "monthlyshop": [
-
+        "Your monthly shop has reset!",
+        "Get in bitches, we're going shopping!"
     ]
 }

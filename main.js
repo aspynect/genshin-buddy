@@ -33,7 +33,7 @@ client.on('interactionCreate', async interaction => {
                     region = "AS"
                     break;
                 case '9': 
-                    region = "Other"
+                    region = "HK/TW"
                     break;
                 default:
                     region = "cringe doodoohead"

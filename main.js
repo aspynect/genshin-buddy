@@ -21,7 +21,21 @@ client.on('interactionCreate', async interaction => {
         if (user && uid) {
             await interaction.reply({content: "Failure: Use only one parameter", ephemeral: true})
         }else if (user) {
-            await interaction.reply({content: `<@${user.id}>'s UID is ${users[user.id]}`, ephemeral: true})
+            var region;
+            switch (users[user.id][0]) {
+                case '6': 
+                    region = "NA"
+                    break;
+                case '7': 
+                    region = "EU"
+                    break;
+                case '8': 
+                    region = "AS"
+                    break;
+                default:
+                    region = "cringe doodoohead"
+            }
+            await interaction.reply({content: `<@${user.id}>'s UID is ${users[user.id]} in region ${region}`, ephemeral: true})
         } else if (uid) {
             users[interaction.member.id] = uid
             await fs.writeFile('./data/users.json', JSON.stringify(users))

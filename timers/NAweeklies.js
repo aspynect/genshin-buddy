@@ -7,7 +7,7 @@ const flags = require('./flags.json');
 
 
 client.on('ready', async () => {
-    await weeklyTimer(client, "Weekly Reminders NA")
+    await weeklyTimer(client, "NA")
     flags.abyss = !flags.abyss
     await fs.writeFile('./flags.json', JSON.stringify(flags))
     process.exit();

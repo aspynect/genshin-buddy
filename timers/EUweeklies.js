@@ -7,7 +7,7 @@ const flags = require('./flags.json');
 
 
 client.on('ready', async () => {
-    await weeklyTimer(client, "Weekly Reminders EU")
+    await weeklyTimer(client, "EU")
     process.exit();
 });
 

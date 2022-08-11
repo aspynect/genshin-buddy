@@ -3,7 +3,7 @@ const secrets = require('./secrets.json');
 
 const commands = [
     {
-        name: 'ping',
+        name: 'hello',
         description: 'h',
     },
 ];

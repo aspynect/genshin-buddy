@@ -1,6 +1,7 @@
 const { randomBytes } = require('crypto');
 const fs = require('fs/promises')
 const flags = require('./flags.json');
+const info = require('../data/info.json')
 const messages = require('./messages.json')
 
 async function weeklyTimer(client, regionName) {
@@ -72,8 +73,8 @@ async function monthlyTimer(client, month) {
                     if (monthlies_role) {
                         await channel.send(`
                             <@&${monthlies_role.id}> \n${messages.monthlies[Math.floor(Math.random()*messages.monthlies.length)]} 
-                            \nThe current shop 4 stars are: ${flags[month.toString()]}
-                            \n The current shop weapons are: ${flags[monthlies_type.toString() + "month"]} series
+                            \nThe current shop 4 stars are: ${info[month.toString()]}
+                            \n The current shop weapons are: ${info[monthlies_type.toString() + "month"]} series
                         `);
                     }
                     break;

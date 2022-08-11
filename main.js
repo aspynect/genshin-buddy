@@ -32,6 +32,9 @@ client.on('interactionCreate', async interaction => {
                 case '8': 
                     region = "AS"
                     break;
+                case '9': 
+                    region = "Other"
+                    break;
                 default:
                     region = "cringe doodoohead"
                     break;

@@ -47,6 +47,13 @@ async function monthlyTimer(client, month) {
     for (const guildId of client.guilds.cache.keys()) {
         var guild = client.guilds.cache.get(guildId);
         var monthlies_role = null
+        var monthlies_type = null
+        if (month % 2 == 0) {
+            monthlies_type = "even"
+        } else if (month % 2 == 1) {
+            monthlies_type = "odd"
+        }
+        console.log(monthlies_type + "month")
         if (guild) {
             console.log("Guild Found")
             let roles = await guild.roles.fetch()
@@ -66,6 +73,7 @@ async function monthlyTimer(client, month) {
                         await channel.send(`
                             <@&${monthlies_role.id}> \n${messages.monthlies[Math.floor(Math.random()*messages.monthlies.length)]} 
                             \nThe current shop 4 stars are: ${flags[month.toString()]}
+                            \n The current shop weapons are: ${flags[monthlies_type.toString() + "month"]} series
                         `);
                     }
                     break;

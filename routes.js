@@ -1,11 +1,27 @@
-const { REST, Routes } = require('discord.js');
+const {REST, Routes, ApplicationCommandOptionType} = require('discord.js');
 const secrets = require('./secrets.json');
 
 const commands = [
     {
-        name: 'hello',
+        name: 'ping',
         description: 'h',
     },
+    {
+        name: 'uid',
+        description: 'Add your UID to the database or mention a user to get their UID',
+        options: [
+            {
+                name: "user",
+                description: "Look up a user's UID",
+                type: ApplicationCommandOptionType.User
+            },
+            {
+                name: "uid",
+                description: "Enter your UID into the database",
+                type: ApplicationCommandOptionType.String
+            }
+        ]
+    }
 ];
 
 const rest = new REST({ version: '10' }).setToken(secrets.token);

@@ -1,5 +1,6 @@
 secrets.json
 timers/flags.json
+data/users.json
 
 # Logs
 logs

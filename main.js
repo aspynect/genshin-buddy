@@ -34,6 +34,7 @@ client.on('interactionCreate', async interaction => {
                     break;
                 default:
                     region = "cringe doodoohead"
+                    break;
             }
             await interaction.reply({content: `<@${user.id}>'s UID is ${users[user.id]} in region ${region}`, ephemeral: true})
         } else if (uid) {

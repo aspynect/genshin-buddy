@@ -1,6 +1,7 @@
 secrets.json
 timers/flags.json
 data/users.json
+execute.sh
 
 # Logs
 logs

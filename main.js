@@ -70,7 +70,25 @@ client.on('interactionCreate', async interaction => {
             await fs.writeFile('./data/users.json', JSON.stringify(users))
             await interaction.reply({content: `UID set to ${uid}`, ephemeral: true})
         } else {
-            await interaction.reply({content: "Failure: Parameter required", ephemeral: true})
+            var region;
+            switch (users[interaction.member.id][0]) {
+                case '6': 
+                    region = "NA"
+                    break;
+                case '7': 
+                    region = "EU"
+                    break;
+                case '8': 
+                    region = "AS"
+                    break;
+                case '9': 
+                    region = "HK/TW"
+                    break;
+                default:
+                    region = "cringe doodoohead"
+                    break;
+            }
+            await interaction.reply({content: `Your UID is ${users[interaction.member.id]} in region ${region}`, ephemeral: true})
         }
     }
 });

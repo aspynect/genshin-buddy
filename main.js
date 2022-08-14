@@ -2,10 +2,35 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const fs = require('fs/promises')
 const secrets = require('./secrets.json');
-const users = require('./data/users.json')
+const users = require('./data/users.json');
+const createRole = require('./roleCreate');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('guildCreate', async guild => {
+    for (const channelId of guild.channels.cache.keys()) {
+        var channel = guild.channels.cache.get(channelId);
+        if (channel.name.toLowerCase().includes('bot')) {
+            console.log("Channel Found");
+            await channel.send('Howdy comrades!');
+            break;
+        }
+    }
+
+    let roleStringList = [
+        "Weekly Reminders NA",
+        "Weekly Reminders EU",
+        "Weekly Reminders AS",
+        "Abyss Reminders NA",
+        "Abyss Reminders EU",
+        "Abyss Reminders AS",
+        "Monthly Reminders"
+    ]
+    for (var roleName in roleStringList) {
+        await createRole(guild, roleStringList[roleName])
+    }
 });
 
 client.on('interactionCreate', async interaction => {

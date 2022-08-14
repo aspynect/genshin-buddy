@@ -2,7 +2,7 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const fs = require('fs/promises')
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const secrets = require('../secrets.json');
-const weeklyTimer = require('./timers.js')
+const {weeklyTimer} = require('./timers.js')
 const flags = require('./flags.json');
 
 

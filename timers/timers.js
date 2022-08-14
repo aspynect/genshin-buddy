@@ -13,8 +13,8 @@ async function weeklyTimer(client, regionName) {
         var abyss_role = null
         if (guild) {
             console.log("Guild Found")
-            weeklies_role = await findRole(guild, `Abyss Reminders ${regionName}`)
-            abyss_role = await findRole(guild, `Weekly Reminders ${regionName}`)
+            weeklies_role = await findRole(guild, `Weekly Reminders ${regionName}`)
+            abyss_role = await findRole(guild, `Abyss Reminders ${regionName}`)
             for (const channelId of guild.channels.cache.keys()) {
                 var channel = guild.channels.cache.get(channelId);
                 if (channel.name.toLowerCase().includes('bot')) {

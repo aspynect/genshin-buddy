@@ -21,7 +21,11 @@ const commands = [
                 type: ApplicationCommandOptionType.String
             }
         ]
-    }
+    },
+    {
+        name: 'leave',
+        description: 'Removes the bot from the server cleanly, bringing all roles created with it',
+    },
 ];
 
 const rest = new REST({ version: '10' }).setToken(secrets.token);

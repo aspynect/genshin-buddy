@@ -3,7 +3,9 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const fs = require('fs/promises')
 const secrets = require('./secrets.json');
 const users = require('./data/users.json');
+const roleList = require('./data/roleList.json')
 const createRole = require('./roleCreate');
+const botGoodbye = require('./leave');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -19,17 +21,9 @@ client.on('guildCreate', async guild => {
         }
     }
 
-    let roleStringList = [
-        "Weekly Reminders NA",
-        "Weekly Reminders EU",
-        "Weekly Reminders AS",
-        "Abyss Reminders NA",
-        "Abyss Reminders EU",
-        "Abyss Reminders AS",
-        "Monthly Reminders"
-    ]
-    for (var roleName in roleStringList) {
-        await createRole(guild, roleStringList[roleName])
+    
+    for (var roleName of roleList) {
+        await createRole(guild, roleName)
     }
 });
 
@@ -38,6 +32,10 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'ping') {
         await interaction.reply('h');
+    }
+
+    if (interaction.commandName === 'leave') {
+        botGoodbye(interaction.guild);
     }
 
     if (interaction.commandName === 'uid') {

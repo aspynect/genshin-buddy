@@ -6,7 +6,12 @@ async function botGoodbye(guild) {
     for (var roleName of roleList) {
         console.log(`Deleting role ${roleName}`)
         let role = await findRole(guild, roleName)
-        if (role) {await guild.roles.delete(role)}
+        
+        try {
+            if (role) {await guild.roles.delete(role)}
+        } catch (e) {
+            console.log(e)
+        }
         console.log("Done")
     }
     await guild.leave();

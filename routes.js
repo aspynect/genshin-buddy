@@ -1,4 +1,4 @@
-const {REST, Routes, ApplicationCommandOptionType} = require('discord.js');
+const {REST, Routes, ApplicationCommandOptionType, PermissionFlagsBits} = require('discord.js');
 const secrets = require('./secrets.json');
 
 const commands = [
@@ -25,6 +25,7 @@ const commands = [
     {
         name: 'leave',
         description: 'Removes the bot from the server cleanly, bringing all roles created with it',
+        default_member_permissions: 32,
     },
 ];
 

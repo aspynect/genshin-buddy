@@ -1,8 +1,8 @@
-const { randomBytes } = require('crypto');
 const fs = require('fs/promises')
 const flags = require('./flags.json');
 const info = require('../data/info.json')
-const messages = require('./messages.json')
+const messages = require('./messages.json');
+const findRole = require('../roleFind');
 
 async function weeklyTimer(client, regionName) {
     console.log(flags.abyss)
@@ -13,19 +13,8 @@ async function weeklyTimer(client, regionName) {
         var abyss_role = null
         if (guild) {
             console.log("Guild Found")
-            let roles = await guild.roles.fetch()
-            for (const roleId of roles.keys()) {
-                const r = roles.get(roleId)
-                let weekliesRoleName = `Weekly Reminders ${regionName}`
-                let abyssRoleName = `Abyss Reminders ${regionName}`
-                if (r.name == weekliesRoleName) {
-                    weeklies_role = r
-                    console.log("Weeklies Role Found")
-                } else if (r.name == abyssRoleName) {
-                    abyss_role = r
-                    console.log("Abyss Role Found")
-                }
-            }
+            weeklies_role = await findRole(guild, `Abyss Reminders ${regionName}`)
+            abyss_role = await findRole(guild, `Weekly Reminders ${regionName}`)
             for (const channelId of guild.channels.cache.keys()) {
                 var channel = guild.channels.cache.get(channelId);
                 if (channel.name.toLowerCase().includes('bot')) {
@@ -84,5 +73,7 @@ async function monthlyTimer(client, month) {
     }
 }
 
-module.exports = weeklyTimer
-module.exports = monthlyTimer
+module.exports = {
+    weeklyTimer,
+    monthlyTimer,
+}

@@ -42,6 +42,11 @@ const commands = [
         default_member_permissions: 32,
     },
     {
+        name: 'reinit-roles',
+        description: 'Reinitializes roles if something breaks',
+        default_member_permissions: 32,
+    },
+    {
         name: 'set-channel',
         description: 'Sets the bot channel to be used',
         default_member_permissions: 32,

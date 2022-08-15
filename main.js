@@ -11,7 +11,8 @@ const assignRole = require('./roleAssign');
 const getChannel = require('./channelGet');
 const setChannel = require('./channelSet');
 const {parametricLog} = require('./parametric');
-const {parametricCheck} = require('./parametric')
+const {parametricCheck} = require('./parametric');
+const reinitializeRoles = require('./reinitializeRoles');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -35,6 +36,10 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'leave') {
         botGoodbye(interaction.guild);
+    }
+
+    if (interaction.commandName === 'reinit-roles') {
+        reinitializeRoles(interaction)
     }
 
     if (interaction.commandName === 'roles') {

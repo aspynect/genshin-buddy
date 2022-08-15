@@ -10,8 +10,8 @@ async function parametricLog(guild, user, interaction) {
         homeGuild: guild.id,
     }
     await fs.writeFile('./data/parametricData.json', JSON.stringify(data))
-    await interaction.reply({content: `Parametric Transformer Reset at ${await data[user.id].timestamp}`, ephemeral: true})
-}
+    await interaction.reply({content: `Parametric Transformer Reset at <t:${await data[user.id].timestamp}:f>`, ephemeral: true})
+}//
 
 async function parametricCheck(client) {
     for (var user in data){

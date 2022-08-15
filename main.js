@@ -10,6 +10,8 @@ const checkRegion = require('./regionCheck');
 const assignRole = require('./roleAssign');
 const getChannel = require('./channelGet');
 const setChannel = require('./channelSet');
+const {parametricLog} = require('./parametric');
+const {parametricCheck} = require('./parametric')
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -44,6 +46,10 @@ client.on('interactionCreate', async interaction => {
         await setChannel(interaction.guild, channel, interaction)
     }
 
+    if (interaction.commandName === 'parametric') {
+        parametricLog(interaction.guild, interaction.member, interaction)
+    }
+
     if (interaction.commandName === 'uid') {
         const user = interaction.options.getUser('user');
         const uid = interaction.options.getString('uid')
@@ -54,7 +60,7 @@ client.on('interactionCreate', async interaction => {
             region = checkRegion(users, region);
             await interaction.reply({content: `<@${user.id}>'s UID is ${users[user.id]} in region ${region}`, ephemeral: true})
         } else if (uid) {
-            users[interaction.member.id] = uid
+            users[interaction.member.id][uid] = uid
             await fs.writeFile('./data/users.json', JSON.stringify(users))
             await interaction.reply({content: `UID set to ${uid}`, ephemeral: true})
         } else {
@@ -66,3 +72,4 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(secrets.token);
+setInterval(() => {parametricCheck(client)}, 1000)

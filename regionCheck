@@ -1,5 +1,5 @@
 async function checkRegion(users) {
-    switch (users[user.id][0]) {
+    switch (users[user.id]["uid"][0]) {
         case '6': 
             region = "NA"
             break;

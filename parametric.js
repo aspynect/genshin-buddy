@@ -4,12 +4,13 @@ const messages = require('./timers/messages.json')
 const getChannel = require('./channelGet')
 
 async function parametricLog(guild, user, interaction) {
-    console.log(`Logging Parametric Transformer for user ${user.name}`)
+    console.log(`Logging Parametric Transformer for user ${user.user.username}`)
     data[user.id] = {
         timestamp: `${await Date.now()}`,
         homeGuild: guild.id,
     }
     await fs.writeFile('./data/parametricData.json', JSON.stringify(data))
+    await interaction.reply({content: `Parametric Transformer Reset at ${await data[user.id].timestamp}`, ephemeral: true})
 }
 
 async function parametricCheck(client) {

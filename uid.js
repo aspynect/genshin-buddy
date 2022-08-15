@@ -5,7 +5,7 @@ async function uid(interaction) {
         await interaction.reply({content: "Failure: Use only one parameter", ephemeral: true})
     }else if (user) {
         var region;
-        let region = checkRegion(interaction.member);
+        region = checkRegion(interaction.member);
         await interaction.reply({content: `<@${user.id}>'s UID is ${users[interaction.member.id]} in region ${region}`, ephemeral: true})
     } else if (uid) {
         if (uid.length > 15) {
@@ -17,7 +17,7 @@ async function uid(interaction) {
         await interaction.reply({content: `UID set to ${uid}`, ephemeral: true})
     } else {
         var region;
-        let region = checkRegion(interaction.member);
+        region = checkRegion(interaction.member);
         await interaction.reply({content: `Your UID is ${users[interaction.member.id]} in region ${region}`, ephemeral: true})
     }
 }

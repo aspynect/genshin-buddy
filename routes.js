@@ -49,7 +49,8 @@ const commands = [
             {
                 name: "channel",
                 description: "Tag the channel you would like the bot to use",
-                type: ApplicationCommandOptionType.Channel
+                type: ApplicationCommandOptionType.Channel,
+                required: true,
             }
         ]
     },
@@ -61,7 +62,8 @@ const commands = [
                 name: "role",
                 description: "Select which role you would like to assign", 
                 choices: roleListCringe,
-                type: ApplicationCommandOptionType.String
+                type: ApplicationCommandOptionType.String,
+                required: true
             }
         ]
     },
@@ -72,7 +74,8 @@ const rest = new REST({ version: '10' }).setToken(secrets.token);
 (async () => {
     try {
         console.log("Started routing");
-        await rest.put(Routes.applicationGuildCommands('1006734097831432278', '1006734321383645246'), { body: commands });
+        //await rest.put(Routes.applicationGuildCommands('1006734097831432278', '1006734321383645246'), { body: commands });
+        await rest.put(Routes.applicationCommands('1006734097831432278'), { body: commands });
         console.log("Routing complete");
     } catch (error) {
         console.error(error);

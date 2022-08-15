@@ -42,7 +42,7 @@ async function monthlyTimer(client, month) {
         console.log(monthlies_type + "month")
         if (guild) {
             console.log("Guild Found")
-            monthlies_role = findRole("Monthly Reminders")
+            monthlies_role = await findRole(guild, "Monthly Reminders")
             channel = await getChannel(guild)
             await channel.send(`
                 <@&${monthlies_role.id}> \n${messages.monthlies[Math.floor(Math.random()*messages.monthlies.length)]} 

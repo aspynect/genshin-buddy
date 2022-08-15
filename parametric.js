@@ -16,10 +16,15 @@ async function parametricLog(guild, user, interaction) {
 async function parametricCheck(client) {
     for (var user in data){
         if (data[user].timestamp != null && Date.now() - data[user].timestamp > 597600000) {
-            let guild = await client.guilds.cache.get(data[user].homeGuild);
-            let channel = await getChannel(guild);
-            console.log(`Pinging ${user}`)
-            await channel.send(`<@${user}> \n${messages.parametric[Math.floor(Math.random()*messages.abyss.length)]}`);
+            try {
+                let guild = await client.guilds.cache.get(data[user].homeGuild);
+                console.log("Guild Found")
+                let channel = await getChannel(guild);
+                console.log(`Pinging ${user}`)
+                await channel.send(`<@${user}> \n${messages.parametric[Math.floor(Math.random()*messages.abyss.length)]}`);
+            } catch {
+                console.log("Failed to find guild")
+            }
             data[user].timestamp = null
             await fs.writeFile('./data/parametricData.json', JSON.stringify(data));
             

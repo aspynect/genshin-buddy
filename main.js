@@ -7,21 +7,17 @@ const roleList = require('./data/roleList.json')
 const createRole = require('./roleCreate');
 const botGoodbye = require('./leave');
 const checkRegion = require('./regionCheck');
+const assignRole = require('./roleAssign');
+const getChannel = require('./channelGet');
+const setChannel = require('./channelSet');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('guildCreate', async guild => {
-    for (const channelId of guild.channels.cache.keys()) {
-        var channel = guild.channels.cache.get(channelId);
-        if (channel.name.toLowerCase().includes('bot')) {
-            console.log("Channel Found");
-            await channel.send('Howdy comrades!');
-            break;
-        }
-    }
-
+    var channel = await getChannel(guild);
+    await channel.send('Howdy comrades!');
     
     for (var roleName of roleList) {
         await createRole(guild, roleName)
@@ -37,6 +33,15 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'leave') {
         botGoodbye(interaction.guild);
+    }
+
+    if (interaction.commandName === 'roles') {
+        assignRole(interaction.guild, interaction.member, interaction.options.getString('role'), interaction)
+    }
+
+    if (interaction.commandName === 'set-channel') {
+        const channel = interaction.options.getChannel('channel')
+        await setChannel(interaction.guild, channel, interaction)
     }
 
     if (interaction.commandName === 'uid') {

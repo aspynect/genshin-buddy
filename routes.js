@@ -1,5 +1,15 @@
 const {REST, Routes, ApplicationCommandOptionType, PermissionFlagsBits} = require('discord.js');
 const secrets = require('./secrets.json');
+const roleList = require('./data/roleList.json')
+
+let roleListCringe = []
+for (var roleName of roleList) {
+    roleListCringe.push({
+        name: roleName,
+        value: roleName,
+    })
+}
+console.log(roleListCringe)
 
 const commands = [
     {
@@ -26,6 +36,30 @@ const commands = [
         name: 'leave',
         description: 'Removes the bot from the server cleanly, bringing all roles created with it',
         default_member_permissions: 32,
+    },
+    {
+        name: 'set-channel',
+        description: 'Sets the bot channel to be used',
+        default_member_permissions: 32,
+        options: [
+            {
+                name: "channel",
+                description: "Tag the channel you would like the bot to use",
+                type: ApplicationCommandOptionType.Channel
+            }
+        ]
+    },
+    {
+        name: 'roles',
+        description: 'Assign or toggle your roles',
+        options: [
+            {
+                name: "role",
+                description: "Select which role you would like to assign", 
+                choices: roleListCringe,
+                type: ApplicationCommandOptionType.String
+            }
+        ]
     },
 ];
 

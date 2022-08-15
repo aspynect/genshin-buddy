@@ -18,7 +18,7 @@ Notifies users of weekly boss resets and biweekly abyss resets!
 ### Monthly
 Notifies users of monthly shop resets
 ## Commands
-
+Note: Commands can be done in ANY channel and will leave no trace
 ### Permissions Required: None
 
 `/uid (uid) (user)` <br/>

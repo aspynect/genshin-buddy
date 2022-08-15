@@ -21,30 +21,30 @@ Notifies users of monthly shop resets
 
 ### Permissions Required: None
 
-`/uid (uid) (user)`
+`/uid (uid) (user)` <br/>
 Sets your UID in the bot database or looks up another user's uid
 - (uid): The UID you wish to enter into the database
 - (user): The user you wish to fetch the UID of
 
-`/roles (role)`
+`/roles (role)` <br/>
 Toggles the user's roles for what reminder pings they want
 - (role): The role you want to turn on/off
 
-`/parametric`
-Sets your Parametric Transformer countdown to start now
+`/parametric` <br/>
+Sets your Parametric Transformer countdown to start now <br/>
 This will remind you when your Transformer resets!
 
-`/ping`
+`/ping` <br/>
 Pings the bot. that's it.
 
 ### Permissions Required: Manage Server
 
-`/leave`
+`/leave` <br/>
 The bot will remove all roles it has made and leave your server cleanly
 
-`reinit-roles`
+`reinit-roles` <br/>
 Reinitializes the roles used by the bot in case one breaks
 
-`set-channel (channel)`
+`set-channel (channel)` <br/>
 Sets the channel for the bot to talk in
 - (channel): The channel you want the bot to talk in

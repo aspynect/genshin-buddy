@@ -31,7 +31,7 @@ Toggles the user's roles for what reminder pings they want
 - (role): The role you want to turn on/off
 
 `/parametric`
-Sets your Parametric Transformer countdown to start now
+Sets your Parametric Transformer countdown to start now <br/>
 This will remind you when your Transformer resets!
 
 `/ping`

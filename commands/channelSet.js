@@ -1,5 +1,5 @@
 const fs = require('fs/promises')
-const serverList = require('./data/servers.json')
+const serverList = require('../data/ignored/servers.json')
 
 async function setChannel(guild, channel, interaction) {
     if (channel){

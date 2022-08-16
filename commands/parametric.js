@@ -1,7 +1,7 @@
-const data = require('./data/parametricData.json')
+const data = require('../data/ignored/parametricData.json')
 const fs = require('fs/promises')
-const messages = require('./timers/messages.json')
-const getChannel = require('./channelGet')
+const messages = require('../data/messages.json')
+const getChannel = require('../functions/channelGet')
 
 async function parametricLog(guild, user, interaction) {
     console.log(`Logging Parametric Transformer for user ${user.user.username}`)

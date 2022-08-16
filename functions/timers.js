@@ -1,17 +1,14 @@
 const fs = require('fs/promises')
-const flags = require('./flags.json');
 const info = require('../data/info.json')
-const messages = require('./messages.json');
-const findRole = require('../roleFind');
-const getChannel = require('../channelGet');
+const messages = require('../data/messages.json');
+const findRole = require('./roleFind');
+const getChannel = require('./channelGet');
 
 async function weeklyTimer(client, regionName) {
-    console.log(flags.abyss)
     console.log(`Logged in as ${client.user.tag}!`);
     for (const guildId of client.guilds.cache.keys()) {
         var guild = client.guilds.cache.get(guildId);
         var weeklies_role = null
-        var abyss_role = null
         if (guild) {
             console.log("Guild Found")
             weeklies_role = await findRole(guild, `Weekly Reminders ${regionName}`)
@@ -25,8 +22,10 @@ async function weeklyTimer(client, regionName) {
     }
 }
 
-async function monthlyTimer(client, month) {
+async function monthlyTimer(client) {
     console.log(`Logged in as ${client.user.tag}!`);
+    month = new Date().getMonth()
+    console.log(`Month: ${month}`)
     for (const guildId of client.guilds.cache.keys()) {
         var guild = client.guilds.cache.get(guildId);
         var monthlies_role = null
@@ -53,8 +52,8 @@ async function monthlyTimer(client, month) {
 
 async function abyssTimer(client, regionName) {
     //for (const guildId of client.guilds.cache.keys()) {
-        //ph guildid
         console.log("Start")
+        //ph guildId
         const guildId = 1006734321383645246
         var guild = await client.guilds.cache.get(guildId);
         console.log(guild)
@@ -69,8 +68,8 @@ async function abyssTimer(client, regionName) {
                 await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}`)
             }
             console.log("Pinging Abyss")
-        }
-    //}
+        //}
+    }
 }
 
 module.exports = {

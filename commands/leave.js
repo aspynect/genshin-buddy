@@ -1,8 +1,8 @@
-const roleList = require('./data/roleList.json')
-const findRole = require('./roleFind')
+const roleList = require('../data/roleList.json')
+const findRole = require('../functions/roleFind')
 
-async function reinitializeRoles(interaction) {
-    let guild = interaction.guild
+
+async function botGoodbye(guild) {
     for (var roleName of roleList) {
         console.log(`Deleting role ${roleName}`)
         let role = await findRole(guild, roleName)
@@ -14,9 +14,8 @@ async function reinitializeRoles(interaction) {
         }
         console.log("Done")
     }
-    for (var roleName of roleList) {
-        await createRole(guild, roleName)
-    }
+    await guild.leave();
+    console.log(`Left ${guild.name}`)
 }
 
-module.exports = reinitializeRoles
+module.exports = botGoodbye

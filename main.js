@@ -1,19 +1,18 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const fs = require('fs/promises')
-const secrets = require('./secrets.json');
-const users = require('./data/users.json');
+const secrets = require('./data/ignored/secrets.json');
+const users = require('./data/ignored/users.json');
 const roleList = require('./data/roleList.json')
-const createRole = require('./roleCreate');
-const botGoodbye = require('./leave');
-const checkRegion = require('./regionCheck');
-const assignRole = require('./roleAssign');
-const getChannel = require('./channelGet');
-const setChannel = require('./channelSet');
-const {parametricLog} = require('./parametric');
-const {parametricCheck} = require('./parametric');
+const createRole = require('./functions/roleCreate');
+const botGoodbye = require('./commands/leave');
+const assignRole = require('./commands/roleAssign');
+const getChannel = require('./functions/channelGet');
+const setChannel = require('./commands/channelSet');
+const {parametricLog} = require('./data/ignored/parametricData.json');
 const reinitializeRoles = require('./reinitializeRoles');
-const uid = require('./uid');
+const uid = require('./commands/uid');
+const timerCheck = require('./functions/checkTimers');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -62,4 +61,7 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(secrets.token);
-setInterval(() => {parametricCheck(client)}, 1000)
+setInterval(() => {
+    //parametricCheck(client);
+    timerCheck();
+}, 10000)

@@ -1,4 +1,4 @@
-const guildList = require("./data/servers.json");
+const guildList = require("../data/ignored/servers.json");
 
 async function getChannel(guild) {
     serverId = guildList[guild.id]

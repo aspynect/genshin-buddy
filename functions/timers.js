@@ -12,7 +12,7 @@ async function weeklyTimer(client, regionName) {
         if (guild) {
             console.log("Guild Found")
             weeklies_role = await findRole(guild, `Weekly Reminders ${regionName}`)
-            channel = await getChannel(guild);
+            channel = await getChannel(guild, "Announcement");
             console.log(channel.name)
             if (weeklies_role) {
                 await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
@@ -39,7 +39,7 @@ async function monthlyTimer(client) {
         if (guild) {
             console.log("Guild Found")
             monthlies_role = await findRole(guild, "Monthly Reminders")
-            channel = await getChannel(guild)
+            channel = await getChannel(guild, "Announcement")
             await channel.send(`
                 <@&${monthlies_role.id}> \n${messages.monthlies[Math.floor(Math.random()*messages.monthlies.length)]} 
                 \nThe current shop 4 stars are: ${info[month.toString()]}
@@ -60,7 +60,7 @@ async function abyssTimer(client, regionName) {
         if (guild) {
             console.log("Guild Found")
             abyss_role = await findRole(guild, `Abyss Reminders ${regionName}`)
-            channel = await getChannel(guild);
+            channel = await getChannel(guild, "Announcement");
             console.log(channel.name)
             if(abyss_role) {
                 await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}`)

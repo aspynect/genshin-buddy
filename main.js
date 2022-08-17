@@ -23,7 +23,7 @@ client.on('ready', () => {
 });
 
 client.on('guildCreate', async guild => {
-    var channel = await getChannel(guild);
+    var channel = await getChannel(guild, "Standard");
     await channel.send('Howdy comrades!');
     
     for (var roleName of roleList) {
@@ -51,11 +51,13 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'set-channel') {
+        const channelType = interaction.options.getString('channel-type')
         const channel = interaction.options.getChannel('channel');
-        await setChannel(interaction.guild, channel, interaction);
+        await setChannel(interaction.guild, channelType, channel, interaction);
     }
 
     if (interaction.commandName === 'parametric') {
+        console.log(interaction.member)
         parametricLog(interaction.guild, interaction.member, interaction);
     }
 

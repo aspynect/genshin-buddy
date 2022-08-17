@@ -52,6 +52,16 @@ const commands = [
         default_member_permissions: 32,
         options: [
             {
+                name: "channel-type",
+                description: "Select the type of channel you would like to set", 
+                choices: [
+                    {name: "Announcement Channel", value: "AnnouncementChannel"},
+                    {name: "Standard Output", value: "StandardOutput"}
+                ],
+                type: ApplicationCommandOptionType.String,
+                required: true
+            },
+            {
                 name: "channel",
                 description: "Tag the channel you would like the bot to use",
                 type: ApplicationCommandOptionType.Channel,

@@ -1,5 +1,5 @@
 const {REST, Routes, ApplicationCommandOptionType, PermissionFlagsBits} = require('discord.js');
-const secrets = require('./secrets.json');
+const secrets = require('./data/ignored/secrets.json');
 const roleList = require('./data/roleList.json')
 
 let roleListCringe = []

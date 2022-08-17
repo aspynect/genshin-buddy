@@ -51,10 +51,8 @@ async function monthlyTimer(client) {
 }
 
 async function abyssTimer(client, regionName) {
-    //for (const guildId of client.guilds.cache.keys()) {
+    for (const guildId of client.guilds.cache.keys()) {
         console.log("Start")
-        //ph guildId
-        const guildId = 1006734321383645246
         var guild = await client.guilds.cache.get(guildId);
         console.log(guild)
         console.log(client)
@@ -68,7 +66,7 @@ async function abyssTimer(client, regionName) {
                 await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}`)
             }
             console.log("Pinging Abyss")
-        //}
+        }
     }
 }
 

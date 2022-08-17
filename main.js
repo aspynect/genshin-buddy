@@ -10,7 +10,7 @@ const assignRole = require('./commands/roleAssign');
 const getChannel = require('./functions/channelGet');
 const setChannel = require('./commands/channelSet');
 const {parametricLog} = require('./data/ignored/parametricData.json');
-const reinitializeRoles = require('./reinitializeRoles');
+const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
 

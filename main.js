@@ -9,10 +9,10 @@ const botGoodbye = require('./commands/leave');
 const assignRole = require('./commands/roleAssign');
 const getChannel = require('./functions/channelGet');
 const setChannel = require('./commands/channelSet');
-const {parametricLog} = require('./data/ignored/parametricData.json');
 const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
+const { parametricLog } = require('./commands/parametric');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -23,7 +23,7 @@ client.on('guildCreate', async guild => {
     await channel.send('Howdy comrades!');
     
     for (var roleName of roleList) {
-        await createRole(guild, roleName)
+        await createRole(guild, roleName);
     }
 });
 
@@ -35,28 +35,28 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'leave') {
-        botGoodbye(interaction.guild);
+        botGoodbye(interaction);
     }
 
     if (interaction.commandName === 'reinit-roles') {
-        reinitializeRoles(interaction)
+        reinitializeRoles(interaction);
     }
 
     if (interaction.commandName === 'roles') {
-        assignRole(interaction.guild, interaction.member, interaction.options.getString('role'), interaction)
+        assignRole(interaction.guild, interaction.member, interaction.options.getString('role'), interaction);
     }
 
     if (interaction.commandName === 'set-channel') {
-        const channel = interaction.options.getChannel('channel')
-        await setChannel(interaction.guild, channel, interaction)
+        const channel = interaction.options.getChannel('channel');
+        await setChannel(interaction.guild, channel, interaction);
     }
 
     if (interaction.commandName === 'parametric') {
-        parametricLog(interaction.guild, interaction.member, interaction)
+        parametricLog(interaction.guild, interaction.member, interaction);
     }
 
     if (interaction.commandName === 'uid') {
-        uid(interaction)
+        uid(interaction);
     }
 });
 

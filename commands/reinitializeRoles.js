@@ -1,7 +1,10 @@
 const roleList = require('../data/roleList.json')
+const createRole = require('../functions/roleCreate')
 const findRole = require('../functions/roleFind')
 
 async function reinitializeRoles(interaction) {
+    await interaction.reply({content: `Reinitializing roles...`, ephemeral: true})
+    console.log(`Reinitializing roles in ${interaction.guild.name}`)
     let guild = interaction.guild
     for (var roleName of roleList) {
         console.log(`Deleting role ${roleName}`)
@@ -17,6 +20,7 @@ async function reinitializeRoles(interaction) {
     for (var roleName of roleList) {
         await createRole(guild, roleName)
     }
+    await interaction.editReply({content: `Reinitialized roles`, ephemeral: true})
 }
 
 module.exports = reinitializeRoles

@@ -96,7 +96,7 @@ async function timerCheck(client) {
     flags.abyss = abyss
     flags.weekly = weekly
     flags.monthly = monthly
-    await fs.writeFile('../data/ignored/flags.json', JSON.stringify(flags));
+    await fs.writeFile('./data/ignored/flags.json', JSON.stringify(flags));
 }
 
 

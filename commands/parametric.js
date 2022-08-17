@@ -12,8 +12,9 @@ async function parametricLog(guild, user, interaction) {
     await fs.writeFile('./data/parametricData.json', JSON.stringify(data))
     let discordStamp = await data[user.id].timestamp
     discordStamp = Math.floor(discordStamp / 1000)
-    await interaction.reply({content: `Parametric Transformer Reset at <t:${discordStamp}:f>`, ephemeral: true})
-}//
+    resetStamp = discordStamp + 86400
+    await interaction.reply({content: `Parametric Transformer Logged at <t:${discordStamp}:f> \nReset Date: <t:${resetStamp}:f>`, ephemeral: true});
+}
 
 async function parametricCheck(client) {
     for (var user in data){

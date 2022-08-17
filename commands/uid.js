@@ -17,7 +17,7 @@ async function uid(interaction) {
             return;
         }
         users[interaction.member.id] = uid
-        await fs.writeFile('./data/users.json', JSON.stringify(users))
+        await fs.writeFile('./data/ignored/users.json', JSON.stringify(users))
         await interaction.reply({content: `UID set to ${uid}`, ephemeral: true})
     } else {
         var region;

@@ -12,10 +12,14 @@ const setChannel = require('./commands/channelSet');
 const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
-const { parametricLog } = require('./commands/parametric');
+const { parametricLog, parametricCheck } = require('./commands/parametric');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    setInterval(() => {
+        parametricCheck(client);
+        timerCheck();
+    }, 1000)
 });
 
 client.on('guildCreate', async guild => {
@@ -61,7 +65,4 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(secrets.token);
-setInterval(() => {
-    //parametricCheck(client);
-    timerCheck();
-}, 10000)
+

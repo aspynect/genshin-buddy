@@ -9,7 +9,7 @@ async function parametricLog(guild, user, interaction) {
         timestamp: `${await Date.now()}`,
         homeGuild: guild.id,
     }
-    await fs.writeFile('./data/parametricData.json', JSON.stringify(data))
+    await fs.writeFile('./data/ignored/parametricData.json', JSON.stringify(data))
     let discordStamp = await data[user.id].timestamp
     discordStamp = Math.floor(discordStamp / 1000)
     resetStamp = discordStamp + 86400
@@ -18,19 +18,18 @@ async function parametricLog(guild, user, interaction) {
 
 async function parametricCheck(client) {
     for (var user in data){
-        if (data[user].timestamp != null && Date.now() - data[user].timestamp > 597600000) {
-            try {
+        try {
+            if ((data[user].timestamp !== null) && (Date.now() - data[user].timestamp) > /*597600000*/ 30000) {
+                console.log(`Checking ${user} parametric`);
                 let guild = await client.guilds.cache.get(data[user].homeGuild);
-                console.log("Guild Found")
                 let channel = await getChannel(guild);
                 console.log(`Pinging ${user}`)
-                await channel.send(`<@${user}> \n${messages.parametric[Math.floor(Math.random()*messages.abyss.length)]}`);
-            } catch {
-                console.log("Failed to find guild")
+                await channel.send(`<@${user}> \n${messages.parametric[Math.floor(Math.random()*messages.parametric.length)]}`);
+                data[user].timestamp = null;
+                await fs.writeFile('./data/ignored/parametricData.json', JSON.stringify(data));
             }
-            data[user].timestamp = null
-            await fs.writeFile('./data/parametricData.json', JSON.stringify(data));
-            
+        } catch {
+            console.log(`Guild of user ${user} not found. Aborting`)
         }
     }
     

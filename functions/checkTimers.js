@@ -1,5 +1,5 @@
 const fs = require('fs/promises')
-const flags = require('../data/ignored/flags.json');
+let flags = require('../data/ignored/flags.json');
 const { abyssTimer, monthlyTimer, weeklyTimer } = require('./timers');
 
 function getDaysInMonth(year, month) {

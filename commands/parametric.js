@@ -18,7 +18,7 @@ async function parametricLog(guild, user, interaction) {
 
 async function parametricCheck(client) {
     for (var user in data){
-        //try {
+        try {
             if ((data[user].timestamp !== null) && (Date.now() - data[user].timestamp) > 597600000 /*10000*/) {
                 console.log(`Checking ${user} parametric`);
                 
@@ -29,9 +29,9 @@ async function parametricCheck(client) {
                 data[user].timestamp = null;
                 await fs.writeFile('./data/ignored/parametricData.json', JSON.stringify(data));
             }
-        //} catch {
-        //    console.log(`Guild of user ${user} not found. Aborting`)
-        //}
+        } catch {
+            console.log(`Guild of user ${user} not found. Aborting`)
+        }
     }
     
 }

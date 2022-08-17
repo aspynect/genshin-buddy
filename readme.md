@@ -21,6 +21,9 @@ Notifies users of monthly shop resets
 Note: Commands can be done in ANY channel and will leave no trace
 ### Permissions Required: None
 
+`/commands`
+Links you here!
+
 `/uid (uid) (user)` <br/>
 Sets your UID in the bot database or looks up another user's uid
 - (uid): The UID you wish to enter into the database
@@ -47,4 +50,7 @@ Reinitializes the roles used by the bot in case one breaks
 
 `set-channel (channel)` <br/>
 Sets the channel for the bot to talk in
+- (channel-type): The type of channel you would like to set
+    -Announcement Channel: Channel for announcement type messages (Weekly, Abyss, Monthly reminders)
+    -Standard Output: Channel for standard output messages (Parametric reminders)
 - (channel): The channel you want the bot to talk in

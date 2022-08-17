@@ -13,8 +13,9 @@ const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
 const { parametricLog, parametricCheck } = require('./commands/parametric');
+const { abyssTimer, weeklyTimer, monthlyTimer } = require('./functions/timers');
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
     setInterval(() => {
         parametricCheck(client);
@@ -32,7 +33,11 @@ client.on('guildCreate', async guild => {
 });
 
 client.on('interactionCreate', async interaction => {
-    if (!interaction.isChatInputCommand()) return;
+    if (!interaction.isChatInputCommand()) {return;}
+    if (!interaction.inGuild()) {
+        interaction.reply("Commands in Direct Messages not supported")
+        return;
+    }
 
     if (interaction.commandName === 'ping') {
         await interaction.reply({content: `h`, ephemeral: true});
@@ -57,8 +62,12 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'parametric') {
-        console.log(interaction.member)
         parametricLog(interaction.guild, interaction.member, interaction);
+    }
+
+    if (interaction.commandName === 'commands') {
+        console.log(`${interaction.user.username} used /commands`)
+        await interaction.reply({content:'Commands can be found [here](<https://github.com/PistachioPiper/genshin-buddy#commands>)', ephemeral: true})
     }
 
     if (interaction.commandName === 'uid') {

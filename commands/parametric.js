@@ -13,13 +13,13 @@ async function parametricLog(guild, user, interaction) {
     let discordStamp = await data[user.id].timestamp
     discordStamp = Math.floor(discordStamp / 1000)
     resetStamp = discordStamp + 597600
-    await interaction.reply({content: `Parametric Transformer Logged at <t:${discordStamp}:f> \nReset Date: <t:${resetStamp}:f>\n(<t:${resetStamp}:R>)`, ephemeral: true});
+    await interaction.reply({content: `Parametric Transformer Logged at <t:${discordStamp}:f> \nReset Date: <t:${resetStamp}:f> (<t:${resetStamp}:R>)`, ephemeral: true});
 }
 
 async function parametricCheck(client) {
     for (var user in data){
         try {
-            if ((data[user].timestamp !== null) && (Date.now() - data[user].timestamp) > 597600000 /*10000*/) {
+            if ((data[user].timestamp !== null) && (Date.now() - data[user].timestamp) > /*597600000*/ 10000) {
                 console.log(`Checking ${user} parametric`);
                 
                 let guild = await client.guilds.cache.get(data[user].homeGuild);

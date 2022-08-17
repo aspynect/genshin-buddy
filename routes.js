@@ -37,6 +37,10 @@ const commands = [
         description: 'Log your parametric transformer to be reminded when it resets!',
     },
     {
+        name: 'commands',
+        description: 'See all commands and syntax',
+    },
+    {
         name: 'leave',
         description: 'Removes the bot from the server cleanly, bringing all roles created with it',
         default_member_permissions: 32,

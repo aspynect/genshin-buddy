@@ -23,11 +23,11 @@ async function timerCheck(client) {
     if (getDaysInMonth(currentDate == currentYear, (currentMonth))) {
         if (currentHour == 20 && currentMinute == 0 && abyss) {
             console.log("Pinging AS Abyss");
-            await abyssTimer(client, "AS");
+            await abyssTimer(client, "AS", "Waxing");
             abyss = false;
         } else if (currentHour == 23 && currentMinute == 0 && abyss) {
             console.log("Pinging EU Abyss");
-            await abyssTimer(client, "EU");
+            await abyssTimer(client, "EU", "Waxing");
             abyss = false;
         } else if (currentMinute == 1) {
             abyss = true
@@ -36,7 +36,7 @@ async function timerCheck(client) {
         if (currentHour == 9 && currentMinute == 0) {
             if (abyss) {
                 console.log("Pinging NA Abyss");
-                await abyssTimer(client, "NA");
+                await abyssTimer(client, "NA", "Waxing");
                 abyss = false;
             }
             if (monthly) {
@@ -51,11 +51,11 @@ async function timerCheck(client) {
     } else if (currentDate == 15) {
         if (currentHour == 20 && currentMinute == 0 && abyss) {
             console.log("Pinging AS Abyss");
-            await abyssTimer(client, "AS");
+            await abyssTimer(client, "AS", "Waning");
             abyss = false;
         } else if (currentHour == 23 && currentMinute == 0 && abyss) {
             console.log("Pinging EU Abyss");
-            await abyssTimer(client, "EU");
+            await abyssTimer(client, "EU", "Waning");
             abyss = false;
         } else if (currentMinute == 1) {
             abyss = true
@@ -63,7 +63,7 @@ async function timerCheck(client) {
     } else if (currentDate == 16) {
         if (currentHour == 9 && currentMinute == 0) {
             if (abyss) {
-                console.log("Pinging NA Abyss");
+                console.log("Pinging NA Abyss", "Waning");
                 await abyssTimer(client, "NA");
                 abyss = false;
             }

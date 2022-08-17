@@ -16,7 +16,7 @@ async function weeklyTimer(client, regionName) {
             console.log(channel.name)
             if (weeklies_role) {
                 await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
-                console.log("Pinging Weeklies")
+                console.log(`Pinging Weeklies ${regionName}`)
             }
         }
     }
@@ -45,17 +45,15 @@ async function monthlyTimer(client) {
                 \nThe current shop 4 stars are: ${info[month.toString()]}
                 \n The current shop weapons are: ${info[monthlies_type.toString() + "month"]} series
             `);
-            console.log("Pinging Monthlies")
+            console.log('Pinging Monthlies')
         }
     }
 }
 
-async function abyssTimer(client, regionName) {
+async function abyssTimer(client, regionName, phase) {
     for (const guildId of client.guilds.cache.keys()) {
         console.log("Start")
         var guild = await client.guilds.cache.get(guildId);
-        console.log(guild)
-        console.log(client)
         var abyss_role = null
         if (guild) {
             console.log("Guild Found")
@@ -63,9 +61,9 @@ async function abyssTimer(client, regionName) {
             channel = await getChannel(guild, "Announcement");
             console.log(channel.name)
             if(abyss_role) {
-                await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}`)
+                await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}\n Abyssal Moon is ${phase}`)
             }
-            console.log("Pinging Abyss")
+            console.log(`Pinging Abyss ${regionName} ${phase}`)
         }
     }
 }

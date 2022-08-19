@@ -19,7 +19,7 @@ async function parametricLog(guild, user, interaction) {
 async function parametricCheck(client) {
     for (var user in data){
         try {
-            if ((data[user].timestamp !== null) && (Date.now() - data[user].timestamp) > /*597600000*/ 10000) {
+            if ((data[user].timestamp !== null) && (Date.now() - data[user].timestamp) > 597600000) {
                 console.log(`Checking ${user} parametric`);
                 
                 let guild = await client.guilds.cache.get(data[user].homeGuild);

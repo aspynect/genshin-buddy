@@ -20,8 +20,8 @@ async function timerCheck(client) {
     let weekly = flags.weekly
     let monthly = flags.monthly
 
-    if (getDaysInMonth(currentDate == currentYear, (currentMonth))) {
-        if (currentHour == 20 && currentMinute == 0 && abyss) {
+    if (currentDate == getDaysInMonth(currentYear, (currentMonth))) {
+        if (currentHour == 20 && currentMinute == 0 && abyss == true) {
             console.log("Pinging AS Abyss");
             await abyssTimer(client, "AS", "Waxing");
             abyss = false;

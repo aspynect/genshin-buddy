@@ -17,9 +17,9 @@ const { abyssTimer, weeklyTimer, monthlyTimer } = require('./functions/timers');
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    setInterval(() => {
-        parametricCheck(client);
-        timerCheck();
+    setInterval(async () => {
+        await parametricCheck(client);
+        await timerCheck(client);
     }, 1000)
 });
 

@@ -1,4 +1,4 @@
-const findRole = require("./roleFind");
+const findRole = require("../functions/roleFind");
 
 async function assignRole(guild, targetUser, roleName, interaction) {
     console.log(roleName)

@@ -1,4 +1,4 @@
-const users = require('./data/users.json');
+const users = require('../data/ignored/users.json')
 
 function checkRegion(user) {
     console.log(users[user.id]);

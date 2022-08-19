@@ -1,65 +1,79 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const fs = require('fs/promises')
-const secrets = require('./secrets.json');
-const users = require('./data/users.json');
+const secrets = require('./data/ignored/secrets.json');
+const users = require('./data/ignored/users.json');
 const roleList = require('./data/roleList.json')
-const createRole = require('./roleCreate');
-const botGoodbye = require('./leave');
-const checkRegion = require('./regionCheck');
-const assignRole = require('./roleAssign');
-const getChannel = require('./channelGet');
-const setChannel = require('./channelSet');
-const {parametricLog} = require('./parametric');
-const {parametricCheck} = require('./parametric');
-const reinitializeRoles = require('./reinitializeRoles');
-const uid = require('./uid');
+const createRole = require('./functions/roleCreate');
+const botGoodbye = require('./commands/leave');
+const assignRole = require('./commands/roleAssign');
+const getChannel = require('./functions/channelGet');
+const setChannel = require('./commands/channelSet');
+const reinitializeRoles = require('./commands/reinitializeRoles');
+const uid = require('./commands/uid');
+const timerCheck = require('./functions/checkTimers');
+const { parametricLog, parametricCheck } = require('./commands/parametric');
+const { abyssTimer, weeklyTimer, monthlyTimer } = require('./functions/timers');
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    setInterval(async () => {
+        await parametricCheck(client);
+        await timerCheck(client);
+    }, 1000)
 });
 
 client.on('guildCreate', async guild => {
-    var channel = await getChannel(guild);
+    var channel = await getChannel(guild, "Standard");
     await channel.send('Howdy comrades!');
     
     for (var roleName of roleList) {
-        await createRole(guild, roleName)
+        await createRole(guild, roleName);
     }
 });
 
 client.on('interactionCreate', async interaction => {
-    if (!interaction.isChatInputCommand()) return;
+    if (!interaction.isChatInputCommand()) {return;}
+    if (!interaction.inGuild()) {
+        interaction.reply("Commands in Direct Messages not supported")
+        return;
+    }
 
     if (interaction.commandName === 'ping') {
         await interaction.reply({content: `h`, ephemeral: true});
     }
 
     if (interaction.commandName === 'leave') {
-        botGoodbye(interaction.guild);
+        botGoodbye(interaction);
     }
 
     if (interaction.commandName === 'reinit-roles') {
-        reinitializeRoles(interaction)
+        reinitializeRoles(interaction);
     }
 
     if (interaction.commandName === 'roles') {
-        assignRole(interaction.guild, interaction.member, interaction.options.getString('role'), interaction)
+        assignRole(interaction.guild, interaction.member, interaction.options.getString('role'), interaction);
     }
 
     if (interaction.commandName === 'set-channel') {
-        const channel = interaction.options.getChannel('channel')
-        await setChannel(interaction.guild, channel, interaction)
+        const channelType = interaction.options.getString('channel-type')
+        const channel = interaction.options.getChannel('channel');
+        await setChannel(interaction.guild, channelType, channel, interaction);
     }
 
     if (interaction.commandName === 'parametric') {
-        parametricLog(interaction.guild, interaction.member, interaction)
+        parametricLog(interaction.guild, interaction.member, interaction);
+    }
+
+    if (interaction.commandName === 'commands') {
+        console.log(`${interaction.user.username} used /commands`)
+        await interaction.reply({content:'Commands can be found [here](<https://github.com/PistachioPiper/genshin-buddy#commands>)', ephemeral: true})
     }
 
     if (interaction.commandName === 'uid') {
-        uid(interaction)
+        uid(interaction);
     }
 });
 
 client.login(secrets.token);
-setInterval(() => {parametricCheck(client)}, 1000)
+

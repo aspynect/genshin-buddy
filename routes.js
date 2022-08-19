@@ -1,5 +1,5 @@
 const {REST, Routes, ApplicationCommandOptionType, PermissionFlagsBits} = require('discord.js');
-const secrets = require('./secrets.json');
+const secrets = require('./data/ignored/secrets.json');
 const roleList = require('./data/roleList.json')
 
 let roleListCringe = []
@@ -37,6 +37,10 @@ const commands = [
         description: 'Log your parametric transformer to be reminded when it resets!',
     },
     {
+        name: 'commands',
+        description: 'See all commands and syntax',
+    },
+    {
         name: 'leave',
         description: 'Removes the bot from the server cleanly, bringing all roles created with it',
         default_member_permissions: 32,
@@ -51,6 +55,16 @@ const commands = [
         description: 'Sets the bot channel to be used',
         default_member_permissions: 32,
         options: [
+            {
+                name: "channel-type",
+                description: "Select the type of channel you would like to set", 
+                choices: [
+                    {name: "Announcement Channel", value: "AnnouncementChannel"},
+                    {name: "Standard Output", value: "StandardOutput"}
+                ],
+                type: ApplicationCommandOptionType.String,
+                required: true
+            },
             {
                 name: "channel",
                 description: "Tag the channel you would like the bot to use",

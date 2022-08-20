@@ -13,14 +13,13 @@ const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
 const { parametricLog, parametricCheck } = require('./commands/parametric');
-const { abyssTimer, weeklyTimer, monthlyTimer } = require('./functions/timers');
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
     setInterval(async () => {
         await parametricCheck(client);
         await timerCheck(client);
-    }, 1000)
+    }, 25000)
 });
 
 client.on('guildCreate', async guild => {

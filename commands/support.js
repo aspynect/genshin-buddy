@@ -1,8 +1,8 @@
-async function sendSupport {
+async function sendSupport() {
     console.log('pee')
 }
 
-async function resolveSupport {
+async function resolveSupport() {
     console.log('poo')
 }
 

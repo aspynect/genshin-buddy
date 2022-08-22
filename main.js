@@ -13,14 +13,14 @@ const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
 const { parametricLog, parametricCheck } = require('./commands/parametric');
-const { abyssTimer, weeklyTimer, monthlyTimer } = require('./functions/timers');
+const { weeklyTimer } = require('./functions/timers');
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
     setInterval(async () => {
         await parametricCheck(client);
         await timerCheck(client);
-    }, 1000)
+    }, 20000);
 });
 
 client.on('guildCreate', async guild => {
@@ -44,15 +44,15 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'leave') {
-        botGoodbye(interaction);
+        await botGoodbye(interaction);
     }
 
     if (interaction.commandName === 'reinit-roles') {
-        reinitializeRoles(interaction);
+        await reinitializeRoles(interaction);
     }
 
     if (interaction.commandName === 'roles') {
-        assignRole(interaction.guild, interaction.member, interaction.options.getString('role'), interaction);
+        await assignRole(interaction.guild, interaction.member, interaction.options.getString('role'), interaction);
     }
 
     if (interaction.commandName === 'set-channel') {
@@ -62,7 +62,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'parametric') {
-        parametricLog(interaction.guild, interaction.member, interaction);
+        await parametricLog(interaction.guild, interaction.member, interaction);
     }
 
     if (interaction.commandName === 'commands') {
@@ -71,7 +71,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'uid') {
-        uid(interaction);
+        await uid(interaction);
     }
 });
 

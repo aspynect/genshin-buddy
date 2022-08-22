@@ -21,7 +21,6 @@ client.on('ready', async () => {
         await parametricCheck(client);
         await timerCheck(client);
     }, 20000);
-    await weeklyTimer(client, "AS");
 });
 
 client.on('guildCreate', async guild => {

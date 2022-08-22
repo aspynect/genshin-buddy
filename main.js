@@ -13,7 +13,6 @@ const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
 const { parametricLog, parametricCheck } = require('./commands/parametric');
-const { weeklyTimer } = require('./functions/timers');
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);

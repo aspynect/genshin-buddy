@@ -72,7 +72,7 @@ async function timerCheck(client) {
         }
     }
 
-    if (currentDay == 7) {
+    if (currentDay == 0) {
         if (currentHour == 20 && currentMinute == 0 && weekly) {
             console.log("Pinging AS Weeklies");
             await weeklyTimer(client, "AS");

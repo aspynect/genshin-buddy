@@ -13,7 +13,6 @@ const reinitializeRoles = require('./commands/reinitializeRoles');
 const uid = require('./commands/uid');
 const timerCheck = require('./functions/checkTimers');
 const { parametricLog, parametricCheck } = require('./commands/parametric');
-const { weeklyTimer } = require('./functions/timers');
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -25,7 +24,7 @@ client.on('ready', async () => {
 
 client.on('guildCreate', async guild => {
     var channel = await getChannel(guild, "Standard");
-    await channel.send('Howdy comrades!');
+    try {await channel.send('Howdy comrades!');} catch {console.log(e)}
     
     for (var roleName of roleList) {
         await createRole(guild, roleName);

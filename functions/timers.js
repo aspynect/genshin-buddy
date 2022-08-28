@@ -15,8 +15,12 @@ async function weeklyTimer(client, regionName) {
             channel = await getChannel(guild, "Announcement");
             console.log(channel.name)
             if (weeklies_role) {
-                await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
-                console.log(`Pinging Weeklies ${regionName}`)
+                try {
+                    await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
+                } catch {
+                    console.log(e)
+                }
+                    console.log(`Pinging Weeklies ${regionName}`)
             }
         }
     }
@@ -40,11 +44,16 @@ async function monthlyTimer(client) {
             console.log("Guild Found")
             monthlies_role = await findRole(guild, "Monthly Reminders")
             channel = await getChannel(guild, "Announcement")
-            await channel.send(`
+            try {
+                await channel.send(`
                 <@&${monthlies_role.id}> \n${messages.monthlies[Math.floor(Math.random()*messages.monthlies.length)]} 
                 \nThe current shop 4 stars are: ${info[month.toString()]}
                 \n The current shop weapons are: ${info[monthlies_type.toString() + "month"]} series
-            `);
+                `);
+            } catch {
+                console.log(e)
+            }
+                
             console.log('Pinging Monthlies')
         }
     }
@@ -60,8 +69,12 @@ async function abyssTimer(client, regionName, phase) {
             abyss_role = await findRole(guild, `Abyss Reminders ${regionName}`)
             channel = await getChannel(guild, "Announcement");
             console.log(channel.name)
-            if(abyss_role) {
+            try {
+                if(abyss_role) {
                 await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}\n Abyssal Moon is ${phase}`)
+                }
+            } catch {
+                console.log(e)
             }
             console.log(`Pinging Abyss ${regionName} ${phase}`)
         }

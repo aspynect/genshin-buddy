@@ -34,7 +34,7 @@ client.on('guildCreate', async guild => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) {return;}
     if (!interaction.inGuild()) {
-        interaction.reply("Commands in Direct Messages not supported")
+        await interaction.reply("Commands in Direct Messages not supported")
         return;
     }
 

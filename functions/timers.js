@@ -13,7 +13,7 @@ async function weeklyTimer(client, regionName) {
             console.log("Guild Found")
             weeklies_role = await findRole(guild, `Weekly Reminders ${regionName}`)
             channel = await getChannel(guild, "Announcement");
-            console.log(channel.name)
+
             if (weeklies_role) {
                 try {
                     await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
@@ -68,7 +68,7 @@ async function abyssTimer(client, regionName, phase) {
             console.log("Guild Found")
             abyss_role = await findRole(guild, `Abyss Reminders ${regionName}`)
             channel = await getChannel(guild, "Announcement");
-            console.log(channel.name)
+
             try {
                 if(abyss_role) {
                 await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}\n Abyssal Moon is ${phase}`)

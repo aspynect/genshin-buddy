@@ -15,11 +15,12 @@ async function weeklyTimer(client, regionName) {
             channel = await getChannel(guild, "Announcement");
 
             if (weeklies_role) {
-                try {
+                await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
+                /*try {
                     await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
                 } catch {
                     console.log(e)
-                }
+                }*/
                     console.log(`Pinging Weeklies ${regionName}`)
             }
         }

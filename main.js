@@ -24,7 +24,7 @@ client.on('ready', async () => {
 
 client.on('guildCreate', async guild => {
     var channel = await getChannel(guild, "Standard");
-    try {await channel.send('Howdy comrades!');} catch {console.log(e)}
+    try {await channel.send('Howdy comrades!');} catch(e) {console.log(e)}
     
     for (var roleName of roleList) {
         await createRole(guild, roleName);

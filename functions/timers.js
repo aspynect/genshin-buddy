@@ -15,12 +15,11 @@ async function weeklyTimer(client, regionName) {
             channel = await getChannel(guild, "Announcement");
 
             if (weeklies_role) {
-                await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
-                /*try {
+                try {
                     await channel.send(`<@&${weeklies_role.id}> \n${messages.weeklies[Math.floor(Math.random()*messages.weeklies.length)]} \n`);
-                } catch {
+                } catch(e) {
                     console.log(e)
-                }*/
+                }
                     console.log(`Pinging Weeklies ${regionName}`)
             }
         }
@@ -51,7 +50,7 @@ async function monthlyTimer(client) {
                 \nThe current shop 4 stars are: ${info[month.toString()]}
                 \n The current shop weapons are: ${info[monthlies_type.toString() + "month"]} series
                 `);
-            } catch {
+            } catch(e) {
                 console.log(e)
             }
                 
@@ -74,7 +73,7 @@ async function abyssTimer(client, regionName, phase) {
                 if(abyss_role) {
                 await channel.send(`<@&${abyss_role.id}> \n${messages.abyss[Math.floor(Math.random()*messages.abyss.length)]}\n Abyssal Moon is ${phase}`)
                 }
-            } catch {
+            } catch(e) {
                 console.log(e)
             }
             console.log(`Pinging Abyss ${regionName} ${phase}`)

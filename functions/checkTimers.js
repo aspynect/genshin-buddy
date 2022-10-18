@@ -6,6 +6,36 @@ function getDaysInMonth(year, month) {
     return new Date(year, month, 0).getDate();
 }
 
+function checkClock(target) {
+    
+    //target variable is a string in the form:
+    // "day letter/date number,hour,minute"
+    
+    let timeData =target.split(',');
+    if(isNaN(timeData[0])) {
+        let dayDict = {'sunday':0,'monday':1,'tuesday':2,'wednesday':3,'thursday':4,'friday':5,'saturday':6};
+        let currentDate = new Date();
+        if(dayDict[timeData[0]] == currentDate.getDay() && timeData[1] == currentDate.getHours() && currentDate.getMinutes() == timeData[2]){
+            return 1;
+        } else if (currentDate.getMinutes() == timeData[2] + 1) {
+            return 2;
+        } else {
+            return 0;
+        }
+    } else {
+        if(timeData[0] == currentDate.getDate() && timeData[1] == currentDate.getHours() && currentDate.getMinutes() == timeData[2]){
+            return 1;
+        } else if (currentDate.getMinutes() == timeData[2] + 1) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+}
+function checkClockSingular() {
+
+}
+
 //i pity whoever is reading this
 async function timerCheck(client) {
     let date = new Date()
@@ -20,7 +50,9 @@ async function timerCheck(client) {
     let weekly = flags.weekly
     let monthly = flags.monthly
 
-    if (currentDate == getDaysInMonth(currentYear, (currentMonth))) {
+
+
+    /*if (currentDate == getDaysInMonth(currentYear, (currentMonth))) {
         if (currentHour == 20 && currentMinute == 0 && abyss == true) {
             console.log("Pinging AS Abyss");
             await abyssTimer(client, "AS", "Waxing");
@@ -92,7 +124,7 @@ async function timerCheck(client) {
         } else if (currentMinute == 1) {
             weekly = true;
         }
-    }
+    }*/
     flags.abyss = abyss
     flags.weekly = weekly
     flags.monthly = monthly

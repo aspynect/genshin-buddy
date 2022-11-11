@@ -9,6 +9,17 @@ const goodTime = 1
 const postTime = 2
 const badTime = 0
 
+function mergeDict(obj1, obj2){
+    var output = {};
+    for (var i in obj1) {
+    output[i] = obj1[i];
+    }
+    for (var j in obj2) {
+    output[j] = obj2[j];
+    }
+    return output;
+};
+
 function getDaysInMonth(year, month) {
     return new Date(year, month, 0).getDate();
 }
@@ -71,15 +82,28 @@ function flagUpdate(obj, name, value) {
 async function timerCheck(client) {
     
     //combine jsons into one dictionary ?
-    let combinedCues = (/*placeholder for combined shit*/)
+    let combinedCues = mergeDict(defaultEvents, customRecurringEvents);
     
     //'placeholderName':'targetString'
 
     let triggerCues = {combinedCues}
     let singleTriggerCues = customSingleEvents
 
-    for (key in triggerCues) {
-        
+    for (const key in triggerCues) {
+        switch(checkClock(triggerCues[`${key}`])) {
+            case goodTime:
+
+            break;
+            case postTime:
+
+            break;
+            case badTime:
+            break;
+        }
+        checkClock(triggerCues[`${key}`]);
+    }
+    for (const key in singleTriggerCues) {
+        checkClockSingular(singleTriggerCues[`${key}`])
     }
 
 

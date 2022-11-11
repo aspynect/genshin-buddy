@@ -90,17 +90,20 @@ async function timerCheck(client) {
     let singleTriggerCues = customSingleEvents
 
     for (const key in triggerCues) {
-        switch(checkClock(triggerCues[`${key}`])) {
+        flag = triggerCues[key].split(',');
+        switch(checkClock(triggerCues[key])) {
             case goodTime:
-
+                if (!flags[flag]) {
+                    //insert calling the timer functions, need to rework these to work nicer
+                    flagUpdate(flags, flag, false)
+                }
             break;
             case postTime:
-
+                flagUpdate(flags, flag, true)
             break;
             case badTime:
             break;
         }
-        checkClock(triggerCues[`${key}`]);
     }
     for (const key in singleTriggerCues) {
         checkClockSingular(singleTriggerCues[`${key}`])

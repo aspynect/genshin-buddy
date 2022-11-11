@@ -48,6 +48,8 @@ function checkClock(target) {
     }
 }
 
+// "date_number,hour,minute,variable_name"
+
 function checkClockSingular() {
     if (timeData[0] == currentDate.getDate() && timeData[1] == currentDate.getHours()) {
         if(currentDate.getMinutes() == timeData[2]){
@@ -61,25 +63,32 @@ function checkClockSingular() {
 }
 
 //funny to reference
-function test(obj, name) {
-    obj[name] = 'cum';
+function flagUpdate(obj, name, value) {
+    obj[name] = value;
 }
 
 
 async function timerCheck(client) {
-    let date = new Date()
     
     //combine jsons into one dictionary ?
     let combinedCues = (/*placeholder for combined shit*/)
-    let triggerCues = {
-        'placeholderName':combinedCues,
-    }
-    let singleTriggerCues = customSingleEvents
     
+    //'placeholderName':'targetString'
+
+    let triggerCues = {combinedCues}
+    let singleTriggerCues = customSingleEvents
+
+    for (key in triggerCues) {
+        
+    }
 
 
 
-    /*const currentYear = date.getFullYear();
+
+
+    /*const 
+    let date = new Date()
+    currentYear = date.getFullYear();
     const currentMonth = (parseInt(date.getMonth) + 1);
     const currentDate = (date.getDate());
     const currentDay = date.getDay();
@@ -162,11 +171,11 @@ async function timerCheck(client) {
         } else if (currentMinute == 1) {
             weekly = true;
         }
-    }*/
+    }
     flags.abyss = abyss
     flags.weekly = weekly
     flags.monthly = monthly
-    await fs.writeFile('./data/ignored/flags.json', JSON.stringify(flags));
+    await fs.writeFile('./data/ignored/flags.json', JSON.stringify(flags));*/
 }
 
 

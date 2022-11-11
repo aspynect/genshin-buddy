@@ -1,6 +1,13 @@
 const fs = require('fs/promises')
 let flags = require('../data/ignored/flags.json');
 const { abyssTimer, monthlyTimer, weeklyTimer } = require('./timers');
+const defaultEvents = require('../data/defaultEvents.json');
+const customRecurringEvents = require('../data/ignored/customEventsRecurring.json');
+const customSingleEvents = require('../data/ignored/customEventsSingle.json')
+
+const goodTime = 1
+const postTime = 2
+const badTime = 0
 
 function getDaysInMonth(year, month) {
     return new Date(year, month, 0).getDate();
@@ -9,37 +16,67 @@ function getDaysInMonth(year, month) {
 function checkClock(target) {
     
     //target variable is a string in the form:
-    // "day letter/date number,hour,minute"
+    // "day_spelling/date_number,hour,minute,variable_name"
+    //date_number of 32 will use the last date of the month
     
     let timeData =target.split(',');
-    if(isNaN(timeData[0])) {
+    let currentDate = new Date();
+    if(isNaN(parseInt(timeData[0]))) {
         let dayDict = {'sunday':0,'monday':1,'tuesday':2,'wednesday':3,'thursday':4,'friday':5,'saturday':6};
-        let currentDate = new Date();
-        if(dayDict[timeData[0]] == currentDate.getDay() && timeData[1] == currentDate.getHours() && currentDate.getMinutes() == timeData[2]){
-            return 1;
-        } else if (currentDate.getMinutes() == timeData[2] + 1) {
-            return 2;
+        if (dayDict[timeData[0]] == currentDate.getDay() && timeData[1] == currentDate.getHours()) {
+            if (currentDate.getMinutes() == timeData[2]){
+                return goodTime;
+            } if (currentDate.getMinutes() == timeData[2] + 1) {
+                return postTime;
+            }
         } else {
-            return 0;
+            return badTime;
         }
     } else {
-        if(timeData[0] == currentDate.getDate() && timeData[1] == currentDate.getHours() && currentDate.getMinutes() == timeData[2]){
-            return 1;
-        } else if (currentDate.getMinutes() == timeData[2] + 1) {
-            return 2;
+        if (timeData[0] == 32) {
+            timeData[0] = getDaysInMonth((currentDate.getFullYear(), currentDate.getMonth();
+        }
+        if (timeData[0] == currentDate.getDate() && timeData[1] == currentDate.getHours()) {
+            if(currentDate.getMinutes() == timeData[2]){
+                return goodTime;
+            } else if (currentDate.getMinutes() == timeData[2] + 1) {
+                return postTime;
+            }
         } else {
-            return 0;
+            return badTime;
         }
     }
 }
-function checkClockSingular() {
 
+function checkClockSingular() {
+    if (timeData[0] == currentDate.getDate() && timeData[1] == currentDate.getHours()) {
+        if(currentDate.getMinutes() == timeData[2]){
+            return goodTime;
+        } else if (currentDate.getMinutes() == timeData[2] + 1) {
+            return postTime;
+        }
+    } else {
+        return badTime;
+    }
 }
 
-//i pity whoever is reading this
+//funny to reference
+function test(obj, name) {
+    obj[name] = 'cum';
+}
+
+
 async function timerCheck(client) {
     let date = new Date()
-    const currentYear = date.getFullYear();
+    
+    let triggerCues = {
+        'placeholder':[placeholderFunction,placeholderFlag],
+    }
+    let singleTriggerCues = {}
+
+
+
+    /*const currentYear = date.getFullYear();
     const currentMonth = (parseInt(date.getMonth) + 1);
     const currentDate = (date.getDate());
     const currentDay = date.getDay();
@@ -48,9 +85,7 @@ async function timerCheck(client) {
 
     let abyss = flags.abyss
     let weekly = flags.weekly
-    let monthly = flags.monthly
-
-
+    let monthly = flags.monthly*/
 
     /*if (currentDate == getDaysInMonth(currentYear, (currentMonth))) {
         if (currentHour == 20 && currentMinute == 0 && abyss == true) {

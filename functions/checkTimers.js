@@ -27,7 +27,7 @@ function getDaysInMonth(year, month) {
 function checkClock(target) {
     
     //target variable is a string in the form:
-    // "day_spelling/date_number,hour,minute,variable_name"
+    // "day_spelling/date_number,hour,minute,flag_name"
     //date_number of 32 will use the last date of the month
     
     let timeData =target.split(',');

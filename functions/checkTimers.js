@@ -69,10 +69,13 @@ function test(obj, name) {
 async function timerCheck(client) {
     let date = new Date()
     
+    //combine jsons into one dictionary ?
+    let combinedCues = (/*placeholder for combined shit*/)
     let triggerCues = {
-        'placeholder':[placeholderFunction,placeholderFlag],
+        'placeholderName':combinedCues,
     }
-    let singleTriggerCues = {}
+    let singleTriggerCues = customSingleEvents
+    
 
 
 

@@ -3,6 +3,19 @@ const info = require('../data/info.json')
 const messages = require('../data/messages.json');
 const findRole = require('./roleFind');
 const getChannel = require('./channelGet');
+const { isString } = require('util');
+
+//TODO redo these pls using dictionaries and shit
+//TODO need to make custom things work per server
+
+async function timerRun(message) {
+    if (util.isString(message)) {
+
+    } else {
+        let messageDict = messages[message]
+
+    }
+}
 
 async function weeklyTimer(client, regionName) {
     console.log(`Logged in as ${client.user.tag}!`);

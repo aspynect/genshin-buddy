@@ -1,4 +1,5 @@
 const fs = require('fs/promises')
+
 let flags = require('../data/ignored/flags.json');
 const { abyssTimer, monthlyTimer, weeklyTimer } = require('./timers');
 const defaultEvents = require('../data/defaultEvents.json');
@@ -26,8 +27,9 @@ function getDaysInMonth(year, month) {
 
 function checkClock(target) {
     
+    //TODO use dictionaries you dumbass ??????
     //target variable is a string in the form:
-    // "day_spelling/date_number,hour,minute,flag_name"
+    // "day_spelling/date_number,hour,minute,flag_name,message/message_dictionary,role_name,server_id"
     //date_number of 32 will use the last date of the month
     
     let timeData =target.split(',');

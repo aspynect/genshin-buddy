@@ -1,3 +1,8 @@
 {
-    "ASabyss":
+    "ASabyss":{"date":32,"hour":20,"minute":0,"flag":"abyss","message_dict":"abyss","role":"Abyss Reminders AS"},
+    "EUabyss":{},
+    "NAabyss":{"date":1,"hour":9,"minute":0,"flag":"abyss","message_dict":"abyss","role":"Abyss Reminders NA"},
+    "ASweeklies":{"day":0,"hour":20,"minute":0,"flag":"abyss","message_dict":"abyss","role":"Abyss Reminders AS"}
 }
+//day_spelling/date_number,hour,minute,flag_name,message/message_dictionary,role_name,server_id
+//TODO fix eu shit

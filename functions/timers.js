@@ -8,7 +8,10 @@ const { isString } = require('util');
 //TODO redo these pls using dictionaries and shit
 //TODO need to make custom things work per server
 //TODO allow for custom flags (make sure to account for duplicates)
-
+//TODO also make the funny thing to make roles per server
+//TODO make sure the bot can delete/reinit roles that are still needed
+//TODO account for editing/deleting custom server events
+//TODO somehow make the role managing roles take custom roles? copium
 
 async function timerRun(message) {
     if (util.isString(message)) {

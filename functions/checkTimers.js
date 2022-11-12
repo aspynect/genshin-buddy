@@ -59,7 +59,7 @@ function checkClock(target) {
     }
 }
 
-// "date_number,hour,minute,variable_name"
+// "date_number,hour,minute,variable_name,message_contents"
 
 function checkClockSingular() {
     if (timeData[0] == currentDate.getDate() && timeData[1] == currentDate.getHours()) {
@@ -94,7 +94,7 @@ async function timerCheck(client) {
         switch(checkClock(triggerCues[key])) {
             case goodTime:
                 if (!flags[flag]) {
-                    //insert calling the timer functions, need to rework these to work nicer
+                    //TODO insert calling the timer functions, may need to rework these to work nicer
                     flagUpdate(flags, flag, false)
                 }
             break;
@@ -106,6 +106,7 @@ async function timerCheck(client) {
         }
     }
     for (const key in singleTriggerCues) {
+        //TODO fill this shit in ong
         checkClockSingular(singleTriggerCues[`${key}`])
     }
 

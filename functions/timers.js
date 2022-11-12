@@ -7,6 +7,8 @@ const { isString } = require('util');
 
 //TODO redo these pls using dictionaries and shit
 //TODO need to make custom things work per server
+//TODO allow for custom flags (make sure to account for duplicates)
+
 
 async function timerRun(message) {
     if (util.isString(message)) {

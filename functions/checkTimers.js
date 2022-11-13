@@ -89,12 +89,10 @@ async function timerCheck(client) {
 
     for (const key in triggerCues) {
         let message = triggerCues[key]
-        //TODO also this shit
         let flag = triggerCues[key]["flag"];
         switch(checkClock(flag)) {
             case goodTime:
                 if (!flags[flag]) {
-                    //TODO insert calling the timer functions, may need to rework these to work nicer
                     timerRun(client, message)
                     flagUpdate(flags, flag, false)
                 }
@@ -109,7 +107,6 @@ async function timerCheck(client) {
     for (const key in singleTriggerCues) {
         let flag = singleTriggerCues[key]["flag"];
         let message = singleTriggerCues[key]
-        //TODO fill this shit in ong
         switch(checkClockSingular(singleTriggerCues[`${key}`])) {
             case goodTime:
                 if(!flags[flag]) {

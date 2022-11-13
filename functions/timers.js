@@ -12,6 +12,7 @@ const { isString } = require('util');
 //TODO make sure the bot can delete/reinit roles that are still needed
 //TODO account for editing/deleting custom server events
 //TODO somehow make the role managing roles take custom roles? copium
+//TODO makea  generalized function for shit
 
 async function timerRun(message) {
     if (util.isString(message)) {

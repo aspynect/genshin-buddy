@@ -5,26 +5,33 @@ const findRole = require('./roleFind');
 const getChannel = require('./channelGet');
 const { isString } = require('util');
 
-//TODO redo these pls using dictionaries and shit
-//TODO need to make custom things work per server
 //TODO allow for custom flags (make sure to account for duplicates)
 //TODO also make the funny thing to make roles per server
 //TODO make sure the bot can delete/reinit roles that are still needed
 //TODO account for editing/deleting custom server events
 //TODO somehow make the role managing roles take custom roles? copium
-//TODO makea  generalized function for shit
+//TODO add command to "clean" old roles
 
 async function timerRun(client, message) {
     console.log(`Logged in as ${client.user.tag}!`);
     
     if (message["server_id"] !== undefined) {
-        
+        var guild = client.guilds.cache.get(guildId);
+        var pingRole = await findRole(guild, message["role"])
+        let channel = await getChannel(guild, "Announcement");
+        await channel.send(`<@{${pingRole.id}}>${message.message}`)
     } else {
-        if (util.isString(message["message"])) {
-        
-        } else {
-            let messageDict = messages[message]
-    
+        for (const guildId of client.guilds.cache.keys()) {
+            let finalMessage
+            if (util.isString(message["message"])) {
+                finalMessage = message["message"]
+            } else {
+                finalMessage = message["message_dict"][Math.floor(Math.random()*messages.weeklies.length)]
+            }
+            var guild = client.guilds.cache.get(guildId);
+            var pingRole = await findRole(guild, message["role"])
+            let channel = await getChannel(guild, "Announcement");
+            await channel.send(`<@{${pingRole.id}}>${finalMessage}`)
         }
     }
 }

@@ -1,7 +1,6 @@
 const fs = require('fs/promises')
 
 let flags = require('../data/ignored/flags.json');
-const { abyssTimer, monthlyTimer, weeklyTimer } = require('./timers');
 const defaultEvents = require('../data/defaultEvents.json');
 const customRecurringEvents = require('../data/ignored/customEventsRecurring.json');
 const customSingleEvents = require('../data/ignored/customEventsSingle.json')
@@ -27,11 +26,10 @@ function getDaysInMonth(year, month) {
 
 function checkClock(target) {
     
-    //TODO use dictionaries you dumbass ??????
-    //target variable is a string in the form:
-    // "day_spelling/date_number,hour,minute,flag_name,message/message_dictionary,role_name,server_id"
+    //target variable is a dictionary with the parameters:
+    // day_spelling OR date_number, hour, minute, flag_name, message OR message_dictionary, role_name, server_id (optional)
     //date_number of 32 will use the last date of the month
-    
+    //TODO fix this part also
     let timeData =target.split(',');
     let currentDate = new Date();
     if(isNaN(parseInt(timeData[0]))) {
@@ -83,22 +81,23 @@ function flagUpdate(obj, name, value) {
 
 async function timerCheck(client) {
     
-    //combine jsons into one dictionary ?
-    let combinedCues = mergeDict(defaultEvents, customRecurringEvents);
     
     //'placeholderName':'targetString'
 
-    let triggerCues = {combinedCues}
-    let singleTriggerCues = customSingleEvents
-
+    let triggerCues = mergeDict(mergeDict(defaultEvents, customRecurringEvents), customSingleEvents);
+    
     for (const key in triggerCues) {
-        flag = triggerCues[key].split(',');
+        //TODO also this shit
+        //TODO sorry i fucked it up you have a lot to do
+        flag = flags[triggerCues[key]["flag"]];
         switch(checkClock(triggerCues[key])) {
             case goodTime:
+
                 if (!flags[flag]) {
-                    //TODO insert calling the timer functions, may need to rework these to work nicer
+                    timerRun()
                     flagUpdate(flags, flag, false)
                 }
+
             break;
             case postTime:
                 flagUpdate(flags, flag, true)

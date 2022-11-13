@@ -31,9 +31,10 @@ function checkClock(target) {
     // day_spelling OR date_number, hour, minute, flag, message OR message_dict, role_name, server_id (optional)
     //date_number of 32 will use the last date of the month
 
-    //TODO make this work off of the flag specifically
-    let timeData =target.split(',');
+    //TODO make this work off of the flag specifically (check changes to make sure they work)
+    let timeData =[];
     let currentDate = new Date();
+    //TODO switch from timedata to using the dictionary target
     if(isNaN(parseInt(timeData[0]))) {
         let dayDict = {'sunday':0,'monday':1,'tuesday':2,'wednesday':3,'thursday':4,'friday':5,'saturday':6};
         if (dayDict[timeData[0]] == currentDate.getDay() && timeData[1] == currentDate.getHours()) {
@@ -90,7 +91,7 @@ async function timerCheck(client) {
     for (const key in triggerCues) {
         let message = triggerCues[key]
         let flag = triggerCues[key]["flag"];
-        switch(checkClock(flag)) {
+        switch(checkClock(triggerCues[key])) {
             case goodTime:
                 if (!flags[flag]) {
                     timerRun(client, message)

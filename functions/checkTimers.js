@@ -1,6 +1,7 @@
 const fs = require('fs/promises')
 
 let flags = require('../data/ignored/flags.json');
+const { abyssTimer, monthlyTimer, weeklyTimer, timerRun } = require('./timers');
 const defaultEvents = require('../data/defaultEvents.json');
 const customRecurringEvents = require('../data/ignored/customEventsRecurring.json');
 const customSingleEvents = require('../data/ignored/customEventsSingle.json')
@@ -27,9 +28,10 @@ function getDaysInMonth(year, month) {
 function checkClock(target) {
     
     //target variable is a dictionary with the parameters:
-    // day_spelling OR date_number, hour, minute, flag_name, message OR message_dictionary, role_name, server_id (optional)
+    // day_spelling OR date_number, hour, minute, flag, message OR message_dict, role_name, server_id (optional)
     //date_number of 32 will use the last date of the month
-    //TODO fix this part also
+
+    //TODO make this work off of the flag specifically
     let timeData =target.split(',');
     let currentDate = new Date();
     if(isNaN(parseInt(timeData[0]))) {
@@ -80,24 +82,22 @@ function flagUpdate(obj, name, value) {
 
 
 async function timerCheck(client) {
-    
-    
-    //'placeholderName':'targetString'
+        //'placeholderName':'targetString'
 
-    let triggerCues = mergeDict(mergeDict(defaultEvents, customRecurringEvents), customSingleEvents);
-    
+    let triggerCues = mergeDict(defaultEvents, customRecurringEvents);
+    let singleTriggerCues = customSingleEvents
+
     for (const key in triggerCues) {
+        let message = triggerCues[key]
         //TODO also this shit
-        //TODO sorry i fucked it up you have a lot to do
-        flag = flags[triggerCues[key]["flag"]];
-        switch(checkClock(triggerCues[key])) {
+        let flag = triggerCues[key]["flag"];
+        switch(checkClock(flag)) {
             case goodTime:
-
                 if (!flags[flag]) {
-                    timerRun()
+                    //TODO insert calling the timer functions, may need to rework these to work nicer
+                    timerRun(client, message)
                     flagUpdate(flags, flag, false)
                 }
-
             break;
             case postTime:
                 flagUpdate(flags, flag, true)
@@ -107,9 +107,24 @@ async function timerCheck(client) {
         }
     }
     for (const key in singleTriggerCues) {
+        let flag = singleTriggerCues[key]["flag"];
+        let message = singleTriggerCues[key]
         //TODO fill this shit in ong
-        checkClockSingular(singleTriggerCues[`${key}`])
+        switch(checkClockSingular(singleTriggerCues[`${key}`])) {
+            case goodTime:
+                if(!flags[flag]) {
+                    timerRun(client, message);
+                    flagUpdate(flags, flag, false);
+                }
+            break;
+            case postTime:
+                //TODO figure out what to do here
+            break;
+            case badTime:
+            break;
+        }
     }
+}
 
 
 

@@ -14,12 +14,18 @@ const { isString } = require('util');
 //TODO somehow make the role managing roles take custom roles? copium
 //TODO makea  generalized function for shit
 
-async function timerRun(message) {
-    if (util.isString(message)) {
-
+async function timerRun(client, message) {
+    console.log(`Logged in as ${client.user.tag}!`);
+    
+    if (message["server_id"] !== undefined) {
+        
     } else {
-        let messageDict = messages[message]
-
+        if (util.isString(message["message"])) {
+        
+        } else {
+            let messageDict = messages[message]
+    
+        }
     }
 }
 

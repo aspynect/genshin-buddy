@@ -66,7 +66,7 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'commands') {
         console.log(`${interaction.user.username} used /commands`)
-        await interaction.reply({content:'Commands can be found [here](<https://github.com/PistachioPiper/genshin-buddy#commands>)', ephemeral: true})
+        await interaction.reply({content:'Commands can be found [here](<https://github.com/aspynect/genshin-buddy#commands>)', ephemeral: true})
     }
 
     if (interaction.commandName === 'uid') {

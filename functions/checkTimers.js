@@ -110,18 +110,21 @@ async function timerCheck(client) {
         let message = singleTriggerCues[key]
         switch(checkClockSingular(singleTriggerCues[`${key}`])) {
             case goodTime:
-                if(!flags[flag]) {
+                if(flags[flag] == true) {
                     timerRun(client, message);
                     flagUpdate(flags, flag, false);
                 }
             break;
             case postTime:
-                //TODO figure out what to do here
+                if(flags[flag] == false) {
+                    flagUpdate(flags, flag, true)
+                }
             break;
             case badTime:
             break;
         }
     }
+    await fs.writeFile('./data/ignored/flags.json', JSON.stringify(flags));
 }
 
 

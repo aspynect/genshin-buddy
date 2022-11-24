@@ -6,11 +6,7 @@ const getChannel = require('./channelGet');
 const { isString } = require('util');
 
 //TODO allow for custom flags (make sure to account for duplicates)
-//TODO also make the funny thing to make roles per server
-//TODO make sure the bot can delete/reinit roles that are still needed
 //TODO account for editing/deleting custom server events
-//TODO somehow make the role managing roles take custom roles? copium
-//TODO add command to "clean" old roles
 
 async function timerRun(client, message) {
     console.log(`Logged in as ${client.user.tag}!`);

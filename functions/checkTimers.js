@@ -28,8 +28,10 @@ function getDaysInMonth(year, month) {
 function checkClock(target) {
     
     //target variable is a dictionary with the parameters:
-    // day_spelling OR date_number, hour, minute, flag, message OR message_dict, role_name, server_id (optional)
+    //day_spelling/date_number,hour,minute,flag_name,message/message_dictionary,role_name,server_id
     //date_number of 32 will use the last date of the month
+
+    //TODO fix eu shit in defaultEvents
 
     //TODO make this work off of the flag specifically (check changes to make sure they work)
     let timeData =[];
@@ -48,7 +50,7 @@ function checkClock(target) {
         }
     } else {
         if (timeData[0] == 32) {
-            timeData[0] = getDaysInMonth((currentDate.getFullYear(), currentDate.getMonth();
+            timeData[0] = getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth());
         }
         if (timeData[0] == currentDate.getDate() && timeData[1] == currentDate.getHours()) {
             if(currentDate.getMinutes() == timeData[2]){
@@ -220,8 +222,8 @@ async function timerCheck(client) {
     flags.abyss = abyss
     flags.weekly = weekly
     flags.monthly = monthly
-    await fs.writeFile('./data/ignored/flags.json', JSON.stringify(flags));*/
-}
+    await fs.writeFile('./data/ignored/flags.json', JSON.stringify(flags));
+}*/
 
 
 

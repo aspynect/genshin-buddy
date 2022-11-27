@@ -7,5 +7,3 @@
     "NAweeklies":{"day":1,"hour":9,"minute":0,"flag":"weekly","message_dict":"weeklies","role":"Weekly Reminders NA"},
     "Monthlies":{"date":1,"hour":9,"minute":0,"flag":"monthly","message_dict":"monthlies","role":"Monthly Reminders NA"}
 }
-//day_spelling/date_number,hour,minute,flag_name,message/message_dictionary,role_name,server_id
-//TODO fix eu shit

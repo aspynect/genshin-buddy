@@ -31,8 +31,6 @@ function checkClock(target) {
     //day_spelling/date_number,hour,minute,flag_name,message/message_dictionary,role_name,server_id
     //date_number of 32 will use the last date of the month
 
-    //TODO fix eu shit in defaultEvents
-
     //TODO make this work off of the flag specifically (check changes to make sure they work)
     let timeData =[];
     let currentDate = new Date();

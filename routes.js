@@ -88,12 +88,28 @@ const commands = [
     },
 ];
 
+const specialCommands = [
+    {
+        name:'eval',
+        description: 'trigger commands. high clearance command.',
+        default_member_permissions: 32,
+        options: [
+            {
+                name:"command",
+                description: "runs a command",
+                type:ApplicationCommandOptionType.String,
+                required: true
+            }
+        ]
+    }
+]
+
 const rest = new REST({ version: '10' }).setToken(secrets.token);
 
 (async () => {
     try {
         console.log("Started routing");
-        //await rest.put(Routes.applicationGuildCommands('1006734097831432278', '1006734321383645246'), { body: commands });
+        await rest.put(Routes.applicationGuildCommands('1006734097831432278', '1006734321383645246'), { body: specialCommands });
         await rest.put(Routes.applicationCommands('1006734097831432278'), { body: commands });
         console.log("Routing complete");
     } catch (error) {

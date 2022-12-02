@@ -4,6 +4,7 @@ const fs = require('fs/promises')
 const secrets = require('./data/ignored/secrets.json');
 const users = require('./data/ignored/users.json');
 const roleList = require('./data/roleList.json')
+const ownerID = require('./data/ignored/ownerID.json')
 const createRole = require('./functions/roleCreate');
 const botGoodbye = require('./commands/leave');
 const assignRole = require('./commands/roleAssign');
@@ -71,6 +72,19 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'uid') {
         await uid(interaction);
+    }
+
+    if (interaction.commandName === 'eval') {
+        if (interaction.user.id !== ownerID.id) {
+            console.log('Improper clearance')
+            return;
+        }
+        if (interaction.user.id === ownerID.id) {
+            let command = interaction.options.getString('command');
+            console.log(`Running eval for ${command}`);
+            eval(command)
+            return;
+        }
     }
 });
 

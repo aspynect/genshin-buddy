@@ -76,7 +76,8 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'eval') {
         if (interaction.user.id !== ownerID.id) {
-            console.log('Improper clearance')
+            console.log(`Improper clearance for eval by ${interaction.user.username}`)
+            await interaction.reply({content: "Improper clearance for command.", ephemeral: true})
             return;
         }
         if (interaction.user.id === ownerID.id) {

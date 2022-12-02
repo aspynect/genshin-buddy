@@ -75,6 +75,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'eval') {
+        let command = interaction.options.getString('command');
         if (interaction.user.id !== ownerID.id) {
             console.log(`${interaction.user.username} Running eval for ${command}`);
             console.log(`Improper clearance for eval by ${interaction.user.username}`)
@@ -83,7 +84,6 @@ client.on('interactionCreate', async interaction => {
         }
         if (interaction.user.id === ownerID.id) {
             try {
-                let command = interaction.options.getString('command');
                 console.log(`${interaction.user.username} Running eval for ${command}`);
                 await eval(command)
                 await interaction.reply({content: "Evaluated command", ephemeral: true})
@@ -91,7 +91,6 @@ client.on('interactionCreate', async interaction => {
             } catch(e){
                 console.log(e)
             }
-        
         }
     }
 });

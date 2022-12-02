@@ -82,11 +82,16 @@ client.on('interactionCreate', async interaction => {
             return;
         }
         if (interaction.user.id === ownerID.id) {
-            let command = interaction.options.getString('command');
-            console.log(`${interaction.user.username} Running eval for ${command}`);
-            await eval(command)
-            await interaction.reply({content: "Evaluated command", ephemeral: true})
-            return;
+            try {
+                let command = interaction.options.getString('command');
+                console.log(`${interaction.user.username} Running eval for ${command}`);
+                await eval(command)
+                await interaction.reply({content: "Evaluated command", ephemeral: true})
+                return;
+            } catch(e){
+                console.log(e)
+            }
+        
         }
     }
 });

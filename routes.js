@@ -109,8 +109,8 @@ const rest = new REST({ version: '10' }).setToken(secrets.token);
 (async () => {
     try {
         console.log("Started routing");
-        await rest.put(Routes.applicationGuildCommands('1006734097831432278', '1006734321383645246'), { body: specialCommands });
-        //await rest.put(Routes.applicationCommands('1006734097831432278'), { body: commands });
+        await rest.put(Routes.applicationGuildCommands(`${secrets.appID}`, '1006734321383645246'), { body: specialCommands });
+        await rest.put(Routes.applicationCommands(`${secrets.appID}`), { body: commands });
         console.log("Routing complete");
     } catch (error) {
         console.error(error);

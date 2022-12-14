@@ -13,7 +13,9 @@ async function timerRun(client, message) {
     
     if (message["server_id"] !== undefined) {
         var guild = client.guilds.cache.get(guildId);
-        var pingRole = await findRole(guild, message["role"])
+        if (util.isString(message["role"])) {
+            var pingRole = await findRole(guild, message["role"])
+        }
         let channel = await getChannel(guild, "Announcement");
         await channel.send(`<@{${pingRole.id}}>${message.message}`)
     } else {
@@ -27,7 +29,11 @@ async function timerRun(client, message) {
             var guild = client.guilds.cache.get(guildId);
             var pingRole = await findRole(guild, message["role"])
             let channel = await getChannel(guild, "Announcement");
-            await channel.send(`<@{${pingRole.id}}>${finalMessage}`)
+            if (pingRole !== undefined) {
+                await channel.send(`<@{${pingRole.id}}>${finalMessage}`)
+            } else {
+                await channel.send(`<@{${finalMessage}`)
+            }
         }
     }
 }
